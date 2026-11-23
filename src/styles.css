@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", Palatino, serif;
+  --font-sans: "Outfit", "Avenir Next", "Segoe UI", sans-serif;
+  --color-ivory: #f6f1e7;
+  --color-ivory-deep: #efe4d2;
+  --color-beige: #e4d5bf;
+  --color-paper: #fbf7f1;
+  --color-ink: #1a1412;
+  --color-ink-soft: #5c5148;
+  --color-burgundy: #6e1d32;
+  --color-burgundy-deep: #4a1222;
+  --color-gold: #a68445;
+  --color-gold-soft: #c6ae74;
+  --color-line: #e3d5c2;
+  --radius: 0.25rem;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background: var(--color-ivory);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100%;
+    background: var(--color-ivory);
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+    font-weight: 500;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: var(--color-burgundy);
+    color: var(--color-ivory);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  body.cursor-fine,
+  body.cursor-fine a,
+  body.cursor-fine button {
+    cursor: none;
+  }
+
+  body.cursor-fine input,
+  body.cursor-fine textarea,
+  body.cursor-fine select {
+    cursor: text;
+  }
+}
+
+.cursor-ring {
+  position: fixed;
+  z-index: 70;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: -0.875rem 0 0 -0.875rem;
+  border: 1px solid var(--color-gold);
+  border-radius: 999px;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

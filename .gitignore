@@ -1,0 +1,10 @@
+node_modules
+
+.vercel
+.grok
+screenshots
+.node_modules.lock
+
+.env
+dist
+.output
