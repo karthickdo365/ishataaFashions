@@ -6,11 +6,19 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import viteReact from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import { nitro } from "nitro/vite";
-// @ts-expect-error JS plugin alongside the TS vite config
 import { grokPwaPlugin } from "./scripts/grok-pwa-plugin.mjs";
-// @ts-expect-error JS plugin alongside the TS vite config
 import { appEnvPlugin } from "./scripts/app-env-plugin.mjs";
 import { isMigrationFile } from "./scripts/migration-plan.mjs";
+
+/**
+ * Render sets RENDER=true on every service. We use it to switch the Nitro
+ * output from the Vercel preset to a plain Node server, and to let the
+ * preview server accept outside traffic.
+ */
+const isRender = Boolean(process.env.RENDER);
+
+/** Hosts allowed to reach the dev/preview server (fixes "Blocked request"). */
+const allowedHosts = [".onrender.com", ".vercel.app", "localhost", "127.0.0.1"];
 
 /** The files `src/lib/db.ts` globs — same directory, same non-recursive scope. */
 function hasGlobbedMigrations(root: string): boolean {
@@ -148,13 +156,17 @@ function authPopupPlugin(): Plugin {
 export default defineConfig(({ command, isPreview }) => ({
   server: {
     host: "0.0.0.0",
-    port: 8080,
-    strictPort: true,
+    // Locally this stays 8080. On Render, PORT is provided by the platform.
+    port: Number(process.env.PORT) || 8080,
+    strictPort: !isRender,
+    allowedHosts,
   },
   preview: {
-    host: "127.0.0.1",
-    port: 8081,
-    strictPort: true,
+    // Render needs 0.0.0.0 to route traffic in; locally keep it private.
+    host: isRender ? "0.0.0.0" : "127.0.0.1",
+    port: Number(process.env.PORT) || 8081,
+    strictPort: !isRender,
+    allowedHosts,
   },
   resolve: { tsconfigPaths: true },
   plugins: [
@@ -170,7 +182,9 @@ export default defineConfig(({ command, isPreview }) => ({
     ...(command === "build" || isPreview
       ? [
           nitro({
-            preset: "vercel",
+            // Vercel keeps using its own preset; Render needs a Node server
+            // (output: .output/server/index.mjs).
+            preset: isRender ? "node-server" : "vercel",
             // Auto-registers server/middleware/* (the PWA install page +
             // manifest + head-tag middleware). Nitro v3 defaults serverDir to
             // false, so removing this silently unwires /?install=1 on deploys.
