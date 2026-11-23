@@ -12,27 +12,6 @@ export function Chrome() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)").matches;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!fine || reduce) return;
-    document.body.classList.add("cursor-fine");
-    const ring = document.createElement("div");
-    ring.setAttribute("aria-hidden", "true");
-    ring.className = "cursor-ring";
-    document.body.appendChild(ring);
-    const move = (event: PointerEvent) => {
-      ring.style.left = `${event.clientX}px`;
-      ring.style.top = `${event.clientY}px`;
-    };
-    window.addEventListener("pointermove", move, { passive: true });
-    return () => {
-      document.body.classList.remove("cursor-fine");
-      ring.remove();
-      window.removeEventListener("pointermove", move);
-    };
-  }, []);
-
   return (
     <>
       <a
