@@ -49,11 +49,6 @@ const HERO_SLIDES: HeroSlide[] = [
     alt: "Silk saree portrait from the Ishtaa atelier",
     focus: "50% 80%",
   },
-  {
-    src: editorial.bridal,
-    alt: "Bridal saree portrait from Ishtaa Fashions",
-    focus: "50% 75%",
-  },
 ];
 
 const HERO_INTERVAL_MS = 3000;
