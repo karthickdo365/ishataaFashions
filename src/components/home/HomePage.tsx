@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { brand, collections, featuredIds, whatsappLink } from "@/data/brand";
-import { editorial, getProduct, products } from "@/data/catalog";
+import { editorial, getProduct } from "@/data/catalog";
 import { ProductCard } from "@/components/product/ProductCard";
 import { priceLine } from "@/lib/money";
 
@@ -53,11 +53,6 @@ const HERO_SLIDES: HeroSlide[] = [
     src: editorial.bridal,
     alt: "Bridal saree portrait from Ishtaa Fashions",
     focus: "50% 75%",
-  },
-  {
-    src: editorial.drape,
-    alt: "Hand-draped saree from the Ishtaa edit",
-    focus: "50% 65%",
   },
 ];
 
@@ -832,14 +827,6 @@ function Hero() {
   const words = brand.tagline.split(" ");
   const half = Math.ceil(words.length / 2);
 
-  const fancyCount = products.filter(
-    (item) => item.category === "fancy"
-  ).length;
-
-  const silkCount = products.filter(
-    (item) => item.category === "silk"
-  ).length;
-
   return (
     /* overflow-hidden: nothing from the hero (silk canvas, petals, glow) can
        spill down into the band below or up under the navigation. */
@@ -900,15 +887,6 @@ function Hero() {
               <dd className="mt-0.5 text-sm text-white">{brand.city}</dd>
             </div>
 
-            <div>
-              <dt className="text-white/50">Priced sarees</dt>
-              <dd className="mt-0.5 text-sm text-white">{fancyCount}</dd>
-            </div>
-
-            <div>
-              <dt className="text-white/50">Silk photographs</dt>
-              <dd className="mt-0.5 text-sm text-white">{silkCount}</dd>
-            </div>
           </dl>
         </div>
 
