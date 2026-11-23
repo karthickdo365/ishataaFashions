@@ -711,7 +711,7 @@ function HeroVisual() {
       {/* Spotlight behind the picture */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-[45%] size-full -translate-x-1/2 -translate-y-1/2 scale-125 rounded-full bg-[#E3C48A]/30 blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-[45%] size-full -translate-x-1/2 -translate-y-1/2 scale-110 rounded-full bg-[#E3C48A]/25 blur-3xl"
       />
 
       {/* Picture: one clean arch with a gold frame */}
@@ -736,7 +736,7 @@ function HeroVisual() {
       </div>
 
       {/* Slide indicators */}
-      <div className="mt-6 flex items-center justify-center gap-2">
+      <div className="mt-5 flex items-center justify-center gap-2">
         {HERO_SLIDES.map((slide, index) => (
           <button
             key={slide.src}
@@ -851,10 +851,23 @@ function Hero() {
   ).length;
 
   return (
-    <section className="relative overflow-x-clip bg-[#2A0B14] text-white">
+    /* overflow-hidden: nothing from the hero (silk canvas, petals, glow) can
+       spill down into the band below or up under the navigation. */
+    <section className="relative overflow-hidden bg-[#2A0B14] text-white">
       <HeroBackground />
 
-      <div className="relative z-10 mx-auto grid min-h-svh w-full max-w-7xl grid-cols-1 items-center gap-12 px-5 pb-16 pt-32 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12 lg:pb-16 lg:pt-36">
+      {/* 3D silk: a soft, faded layer that fills the right side of the hero.
+          It is clipped to the hero and fades out on every edge, so there is
+          no hard rectangle any more. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-y-0 right-0 z-0 w-full opacity-60 lg:w-[68%] mask-image:radial-gradient(ellipse_at_65%_50%,#000_28%,transparent_72%) [-webkit-mask-image:radial-gradient(ellipse_at_65%_50%,#000_28%,transparent_72%)]"
+      >
+        <SilkStage />
+      </div>
+
+      {/* Fits one screen: height = viewport. Scroll down for the rest. */}
+      <div className="relative z-10 mx-auto grid min-h-svh w-full max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-12 pt-28 sm:px-8 lg:grid-cols-12 lg:gap-8 lg:px-12 lg:pb-10 lg:pt-32">
 
         {/* Text side */}
         <div className="min-w-0 lg:col-span-5">
@@ -903,26 +916,11 @@ function Hero() {
           </dl>
         </div>
 
-        {/* Picture side — visible 3D silk animation behind the saree arch */}
+        {/* Picture side — the arch is sized from the screen height, so the
+            whole slideshow always fits inside one screen. */}
         <div className="min-w-0 px-2 sm:px-8 lg:col-span-7 lg:px-0">
-          {/* FIX 1: valid Tailwind arbitrary width -> w-[min(...)].
-              Spaces inside calc() are written as underscores. */}
-          <div className="relative isolate mx-auto w-min(100%,32rem,max(15rem,calc((100svh_-_14rem)*0.8)))">
-            {/* Canvas fills the same measured area as the portrait arch.
-                The extra scale lets the silk appear around the arch edges.
-                FIX 2: valid arbitrary CSS property -> [mask-image:...]
-                (plus the -webkit- version for Safari/older Chromium). */}
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-0 scale-[1.25] opacity-80 mask-image:radial-gradient(ellipse_at_center,#000_38%,transparent_70%)] [-webkit-mask-image:radial-gradient(ellipse_at_center,#000_38%,transparent_70%)"
-            >
-              <SilkStage />
-            </div>
-
-            {/* Keep the existing slideshow and gold frame above the silk. */}
-            <div className="relative z-10">
-              <HeroVisual />
-            </div>
+          <div className="relative mx-auto w-min(100%,32rem,max(15rem,calc((100svh_-_15rem)*0.8)))">
+            <HeroVisual />
           </div>
         </div>
 
