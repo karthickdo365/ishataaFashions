@@ -861,7 +861,13 @@ function Hero() {
           no hard rectangle any more. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 z-0 w-full opacity-60 lg:w-[68%] mask-image:radial-gradient(ellipse_at_65%_50%,#000_28%,transparent_72%) [-webkit-mask-image:radial-gradient(ellipse_at_65%_50%,#000_28%,transparent_72%)]"
+        className="pointer-events-none absolute inset-y-0 right-0 z-0 w-full opacity-60 lg:w-[68%]"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse at 65% 50%, #000 28%, transparent 72%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at 65% 50%, #000 28%, transparent 72%)",
+        }}
       >
         <SilkStage />
       </div>
@@ -919,7 +925,15 @@ function Hero() {
         {/* Picture side — the arch is sized from the screen height, so the
             whole slideshow always fits inside one screen. */}
         <div className="min-w-0 px-2 sm:px-8 lg:col-span-7 lg:px-0">
-          <div className="relative mx-auto w-min(100%,32rem,max(15rem,calc((100svh_-_15rem)*0.8)))">
+          {/* Width is set with an inline style on purpose: it always works,
+              even if Tailwind skips an arbitrary class. */}
+          <div
+            className="relative mx-auto"
+            style={{
+              width:
+                "min(100%, 32rem, max(15rem, calc((100svh - 15rem) * 0.8)))",
+            }}
+          >
             <HeroVisual />
           </div>
         </div>
