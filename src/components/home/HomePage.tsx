@@ -40,11 +40,6 @@ type HeroSlide = {
 
 const HERO_SLIDES: HeroSlide[] = [
   {
-    src: "/artifacts/ref/full-saree.png",
-    alt: "Magenta handloom saree with a wide border and tassels",
-    detail: "/artifacts/ref/pallu.png",
-  },
-  {
     src: editorial.portraitA,
     alt: "Elegant saree portrait from the Ishtaa atelier",
     focus: "50% 80%",
@@ -63,11 +58,6 @@ const HERO_SLIDES: HeroSlide[] = [
     src: editorial.drape,
     alt: "Hand-draped saree from the Ishtaa edit",
     focus: "50% 65%",
-  },
-  {
-    src: "/artifacts/ref/hero2.jpg",
-    alt: "Colourful silk sarees with zari borders",
-    focus: "35% 55%",
   },
 ];
 
