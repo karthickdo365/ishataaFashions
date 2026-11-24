@@ -1,7 +1,6 @@
 import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { whatsappLink } from "@/data/brand";
-import { WhatsappLogo } from "@/components/WhatsappLogo";
 
 export function Chrome() {
   const [showTop, setShowTop] = useState(false);
@@ -15,7 +14,7 @@ export function Chrome() {
 
   return (
     <>
-      <a
+      {/* <a
         href={whatsappLink("Hello Ishtaa Fashions, I would like to enquire about a saree.")}
         target="_blank"
         rel="noreferrer"
@@ -23,7 +22,7 @@ export function Chrome() {
       >
         <WhatsappLogo className="size-5 text-[#25D366]" />
         WhatsApp
-      </a>
+      </a> */}
       {showTop ? (
         <button
           type="button"

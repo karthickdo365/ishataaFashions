@@ -4,7 +4,6 @@ import { X } from "lucide-react";
 import { getProduct } from "@/data/catalog";
 import { priceLine, productEnquiry } from "@/lib/money";
 import { useBoutique, useUi } from "@/stores/boutique";
-import { WhatsappLogo } from "@/components/WhatsappLogo";
 import { toast } from "sonner";
 
 export function QuickView() {
@@ -48,7 +47,7 @@ export function QuickView() {
                   >
                     Add to enquiry bag
                   </button>
-                  <a
+                  {/* <a
                     href={productEnquiry(product)}
                     target="_blank"
                     rel="noreferrer"
@@ -56,7 +55,7 @@ export function QuickView() {
                   >
                     <WhatsappLogo className="size-5 text-[#25D366]" />
                     Enquire on WhatsApp
-                  </a>
+                  </a> */}
                   <button
                     type="button"
                     className="px-5 py-2 text-sm text-ink-soft"
