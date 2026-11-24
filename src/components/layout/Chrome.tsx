@@ -1,6 +1,7 @@
-import { ArrowUp, MessageCircle } from "lucide-react";
+import { ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import { whatsappLink } from "@/data/brand";
+import { WhatsappLogo } from "@/components/WhatsappLogo";
 
 export function Chrome() {
   const [showTop, setShowTop] = useState(false);
@@ -20,7 +21,7 @@ export function Chrome() {
         rel="noreferrer"
         className="fixed right-4 bottom-5 z-40 flex items-center gap-2 bg-burgundy px-4 py-3 text-xs tracking-widest text-ivory uppercase"
       >
-        <MessageCircle className="size-4" />
+        <WhatsappLogo className="size-5 text-[#25D366]" />
         WhatsApp
       </a>
       {showTop ? (

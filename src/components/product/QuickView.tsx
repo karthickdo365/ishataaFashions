@@ -4,6 +4,7 @@ import { X } from "lucide-react";
 import { getProduct } from "@/data/catalog";
 import { priceLine, productEnquiry } from "@/lib/money";
 import { useBoutique, useUi } from "@/stores/boutique";
+import { WhatsappLogo } from "@/components/WhatsappLogo";
 import { toast } from "sonner";
 
 export function QuickView() {
@@ -51,8 +52,9 @@ export function QuickView() {
                     href={productEnquiry(product)}
                     target="_blank"
                     rel="noreferrer"
-                    className="border border-ink px-5 py-3 text-center text-sm tracking-widest uppercase"
+                    className="flex items-center justify-center gap-2 border border-ink px-5 py-3 text-sm tracking-widest uppercase"
                   >
+                    <WhatsappLogo className="size-5 text-[#25D366]" />
                     Enquire on WhatsApp
                   </a>
                   <button
